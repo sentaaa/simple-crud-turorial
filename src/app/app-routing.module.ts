@@ -8,8 +8,10 @@ const routes: Routes = [
 {path: "listBooks",
 component: ListBooksComponent,
 
-}, {path:"",
-component: HomeComponent,}
+}, {path:"home",
+component: HomeComponent,},
+{path: "**",
+redirectTo:"/home"},
 
 ];
 
