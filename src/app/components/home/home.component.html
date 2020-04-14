@@ -1,1 +1,17 @@
 <p>home works!</p>
+
+{{transformBookTitle(bookTitle)}}
+
+<div class="alert alert-primary" *ngIf="showAlert"> 
+
+    Test Alert
+</div>
+<ul>
+<li *ngFor="let book of books"> {{ book }}> </li>
+
+</ul>
+
+<input class="form-control" placeholder="Neues Buch erstellen " [(ngModel)]="newBookTitle">
+<button class="btn btn-outline-success" (click)="onButtonClicked()"> KLick mich</button>
+
+
