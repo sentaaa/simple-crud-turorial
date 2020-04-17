@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MethodCall } from '@angular/compiler';
 
 @Component({
   selector: 'app-home',
@@ -8,24 +7,27 @@ import { MethodCall } from '@angular/compiler';
 })
 export class HomeComponent implements OnInit {
 
-  public bookTitle: String = "EREBOS";
-  public showAlert: boolean = true;
-  public newBookTitle: String ="";
-  public books: string []= [
-"0",
-"1",
-"2"
-];
+  constructor(private storageService: StorageService) {}
 
-  constructor() { }
+  public bookTitle: string = "EREBOS";
+  public showAlert: boolean = true;
+  public newBookTitle: string = "";
+  public readonly maxTitleLength: number = 20;
+  public books: string[] = [];
 
   ngOnInit(): void {
+    this.books = this.storageService.getBooks();
   }
- public transformBookTitle(title): string{
-   return "Buch: " + title;
- }
- public onButtonClicked(){
-  // this.showAlert = !this.showAlert;
-  this.books.push("Buch Nr." + Math.round(Math.random() * 100));
- }
+  public transformBookTitle(title): string {
+    return "Buch: " + title;
+  }
+  public onButtonClicked() {
+    this.addNewBook();
+  }
+  public addNewBook() {
+    // this.showAlert = !this.showAlert;
+    this.books.push(this.newBookTitle);
+    this.storageService.setBooks(this.books);
+    this.newBookTitle = "";
+  }
 }

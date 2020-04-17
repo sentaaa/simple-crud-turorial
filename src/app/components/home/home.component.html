@@ -1,17 +1,27 @@
-<p>home works!</p>
 
-{{transformBookTitle(bookTitle)}}
-
-<div class="alert alert-primary" *ngIf="showAlert"> 
-
-    Test Alert
+ 
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <ul>
+                <li *ngFor="let book of books">{{ book }}</li>
+            </ul>
+        </div>
+        <div class="col-6">
+            <input class="form-control" placeholder="Neues Buch erstellen" [(ngModel)]="newBookTitle">
+    
+            <!--Runde klammern = event-->
+ 
+            <div [class]="'alert alert-'+ (newBookTitle.length <=  maxTitleLength ? 'primary':'warning')" *ngIf="newBookTitle == ''">
+              <span *ngIf="newBookTitle.length<= maxTitleLength">Wenn sie den Button drücken, Buch mit namen <i>{{ newBookTitle}}</i> erstellt.</span>
+              <span *ngIf="newBookTitle.length> maxTitleLength">um {{ newBookTitle.length }} zu lang</span>
+           
+            </div>
+        </div>
+ 
+        <div class="col-3">
+            <!--Runde klammern = event-->
+            <button class="mx-auto d-block mt-2 btn btn-outline-success" [disabled]="newBookTitle.length > maxTitleLength"(click)="onButtonClicked()">Klick mich!</button>
+        </div>
+    </div>
 </div>
-<ul>
-<li *ngFor="let book of books"> {{ book }}> </li>
-
-</ul>
-
-<input class="form-control" placeholder="Neues Buch erstellen " [(ngModel)]="newBookTitle">
-<button class="btn btn-outline-success" (click)="onButtonClicked()"> KLick mich</button>
-
-
