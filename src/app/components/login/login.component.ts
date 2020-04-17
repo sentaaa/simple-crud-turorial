@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthenticationService} from 'src/app/services/authentication.service'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -10,13 +12,15 @@ export class LoginComponent {
   public password: string = "";
   public formInvalid: boolean = false;
   public usernameOrPasswordWrong: boolean = false;
-  constructor(private authenticationService: AuthenticationService, private router: Router) { }
+
+  constructor(private authenticationService: AuthenticationService, private router:Router) { }
+  
   public login(): void {
     if (this.username && this.password) {
-      const loginsuccessful: boolean = this.authenticationService.login(this.username, this.password);
-      if (loginsuccessful) {
+      const loginSuccessful: boolean = this.authenticationService.login(this.username, this.password);
+      if (loginSuccessful) {
         this.usernameOrPasswordWrong = false;
-        this.router.navigate(["/home"])
+        this.router.navigate(["/home"]);
       } else { this.usernameOrPasswordWrong = true; }
 
     } else { this.formInvalid = true; }
